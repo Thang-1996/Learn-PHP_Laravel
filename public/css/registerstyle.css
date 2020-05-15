@@ -1,0 +1,66 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-image: url("https://www.upsieutoc.com/images/2020/05/15/1092710.jpg");
+}
+.box-login{
+    width: 100%;
+    float: left;
+    height: 600px;
+    border-radius: 15px;
+    background-color: ghostwhite;
+    margin-top: 100px;
+}
+.left-img{
+    width: 50%;
+    float:left;
+    background-color: red;
+    position: relative;
+}
+.left-img img{
+    max-width: 60%;
+    display: flex;
+    position: absolute;
+    top: 60px;
+    left: 100px;
+}
+.right-form{
+    width: 50%;
+    float: right;
+    margin-top: 30px;
+    margin-right: 30px;
+    border-radius: 15px;
+    padding-bottom: 25px;
+    border: 2px solid #DBDBDB;
+}
+.title{
+    width: 100%;
+    float: left;
+    margin: 30px 0;
+    text-align: center;
+}
+.form{
+    width: 100%;
+    float: left;
+}
+.form-group{
+    padding: 0 40px;
+}
+.form-group input{
+    border-radius: 15px;
+    height: 40px;
+    margin-bottom: 30px;
+}
+.button{
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding: 20px 0;
+}
+.button button{
+    width: 460px;
+    height: 45px;
+    border-radius: 15px;
+}
+
