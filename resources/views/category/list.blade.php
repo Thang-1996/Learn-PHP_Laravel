@@ -57,6 +57,8 @@
                 @endforeach
                 </tbody>
             </table>
+            {!! $categories ->links() !!}
+{{--            {{ $categories->links(asset("/view.name")) }}--}}
         </div>
         <!-- /.card-body -->
     </div>

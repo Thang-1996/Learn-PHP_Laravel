@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Brand;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,11 @@ class WebController extends Controller
 //            $category = DB::table("categories")->get(); // sử dụng querry buider
 //            dd($category);
             // sử dụng ORM
-            $category = Category::all(); // dùng hàm all( lấy tất cả )
+//            $category = Category::all(); // dùng hàm all( lấy tất cả )
+            // phan trang trong ngoac la so luong phan tu cua 1 trang
+            // simplePaginate la chi co prev or next
+//            $category = Category::simplePaginate(20);
+            $category = Category::paginate(20);
             // show danh sách theo điều kiện
 //            $category = Category::where("category_name","LIKE","D%")->get();
 //            dd($category); // mỗi phần tử trong array sẽ là 1 đối tượng  của Category
@@ -69,7 +74,8 @@ class WebController extends Controller
     public function listBrand(){
         // lấy dữ liệu từ database
         // tạo biến db là tên cột
-        $brand = DB::table("brands")->get(); // querry buider
+//        $brand = DB::table("brands")->get(); // querry buider
+        $brand = Brand::paginate(20);
 //            dd($category);
         // cách gửi sang file view truyền vào return thêm 2 tham số
         // tham số đầu tiên là 1 mảng lấy ra từ db và truyền vào biến categories ở trên
@@ -83,20 +89,15 @@ class WebController extends Controller
         // cách validate
         $request->validate([
             "brand_name" => "required|string|min:3|unique:brands"
-            // require phải điền kiểu string tối thiếu 6 unique không trùng : categories bảng
         ]);
         try {
-
-            // insert vào bảng
-            DB::table("brands")->insert([
-                "brand_name" => $request->get("brand_name"),
-                "created_at" => Carbon::now(),
-                "updated_at" => Carbon::now() //  lấy thời gian hiện tại
+            Brand::create([
+                "brand_name" => $request->get("brand_name")
             ]);
         }catch (\Exception $exception){
             return redirect()->back();
         }
-        return redirect()->to("/list-brand");
+        return redirect()->to("/list-category");
     }
     // lay du lieu ve form
     public function editCategory($id){ // id tương đương với querry select truyền vào để hướng tới 1 đối tượng object cụ thể muốn thay đổi
@@ -108,6 +109,11 @@ class WebController extends Controller
 //            dd($category);
         return view("category.edit",[
             "category" => $category]);
+    }
+    public function editBrand($id){
+        $brand = Brand::findOrFail($id);
+        return view("brand.edit",[
+            "brand" => $brand]);
     }
     //ham thay doi put du lieu len
     public function updateCategory($id,Request $request){
@@ -125,6 +131,21 @@ class WebController extends Controller
         }
         return redirect()->to("/list-category");
     }
+    public function updateBrand($id,Request $request){
+        $brand = Brand::findOrFail($id);
+        $request->validate([ // unique voi categories(table) category_name(truong muon unique), (id khong muon bi unique)
+            "brand_name" => "required|min:3|unique:brands,brand_name,{$id}"
+        ]);
+//            die("pass roi");
+        try{
+            $brand->update([
+                "brand_name"=> $request->get("brand_name")
+            ]);
+        }catch(Exception $exception){
+            return redirect()->back();
+        }
+        return redirect()->to("/list-brand");
+    }
     // ham delete
     public function deleteCategory($id){
             $category = Category::findorFail($id);
@@ -134,6 +155,15 @@ class WebController extends Controller
             return redirect()->back();
         }
         return redirect()->to("/list-category");
+    }
+    public function deleteBrand($id){
+        $brand = Brand::findorFail($id);
+        try {
+            $brand->delete();
+        }catch (\Exception $exception){
+            return redirect()->back();
+        }
+        return redirect()->to("/list-brand");
     }
 }
 

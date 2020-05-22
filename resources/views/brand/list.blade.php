@@ -27,6 +27,7 @@
                     <th>Create_At</th>
                     <th>Update_At</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,12 +35,19 @@
                 {{--                    // cú pháp vòng lặp của balde engine--}}
                 @foreach($brands as $brand)
                 <tr>
-                    <td>{{@$brand->id}}</td>
-                    <td>{{@$brand->brand_name}}</td>
-                    <td>{{@$brand->created_at}}</td>
-                    <td>{{@$brand->updated_at}}</td>
+                    <td>{{$brand->__get("id")}}</td>
+                    <td>{{$brand->__get("brand_name")}}</td>
+                    <td>{{$brand->__get("created_at")}}</td>
+                    <td>{{$brand->__get("updated_at")}}</td>
                     <td>
-                        <a href="{{url("/edit-brand/{$brand->__get("id")}"}}" class="btn btn-outline-dark">Edit</a>
+                        <a href="{{url("/edit-brand/{$brand->__get("id")}")}}" class="btn btn-outline-dark">Edit</a>
+                    </td>
+                    <td>
+                        <form action="{{url("/delete-brand/{$brand->__get("id")}")}}" method="post">
+                            @method("DELETE")
+                            @csrf
+                            <button type="submit" onclick="return confirm('chac khong?');" class="btn btn-outline-dark">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
