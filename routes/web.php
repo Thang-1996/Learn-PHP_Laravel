@@ -30,3 +30,5 @@ Route::post("/save-brand","WebController@saveBrand");
 // update
 Route::get("/edit-category/{id}","WebController@editCategory"); // id truyền vào tương đương với querry parameter
 Route::put("/update-category/{id}","WebController@updateCategory");
+//Delete
+Route::delete("/delete-category/{id}","WebController@deleteCategory");

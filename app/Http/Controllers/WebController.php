@@ -125,5 +125,15 @@ class WebController extends Controller
         }
         return redirect()->to("/list-category");
     }
+    // ham delete
+    public function deleteCategory($id){
+            $category = Category::findorFail($id);
+        try {
+            $category->delete();
+        }catch (\Exception $exception){
+            return redirect()->back();
+        }
+        return redirect()->to("/list-category");
+    }
 }
 

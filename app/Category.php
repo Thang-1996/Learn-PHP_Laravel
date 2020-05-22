@@ -13,10 +13,10 @@ class Category extends Model
     public $fillable = [
       "category_name"
     ];
-    public function get($key){
-        if(is_null($this->__get($key)))
-            return "default";
-        return $this->__get($key);
-
-    }
+//    public function get($key){
+//        if(is_null($this->__get($key)))
+//            return "default";
+//        return $this->__get($key);
+//
+//    }
 }

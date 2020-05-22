@@ -27,6 +27,7 @@
                     <th>Create_At</th>
                     <th>Update_At</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,6 +45,13 @@
                     <td>{{$category->__get("updated_at")}}</td>
                     <td>
                         <a href="{{url("/edit-category/{$category->__get("id")}")}}" class="btn btn-outline-dark">Edit</a>
+                    </td>
+                    <td>
+                        <form action="{{url("/delete-category/{$category->__get("id")}")}}" method="post">
+                            @method("DELETE")
+                            @csrf
+                            <button type="submit" onclick="return confirm('chac khong?');" class="btn btn-outline-dark">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
