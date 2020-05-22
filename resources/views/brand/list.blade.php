@@ -26,6 +26,7 @@
                     <th>brand_Name</th>
                     <th>Create_At</th>
                     <th>Update_At</th>
+                    <th>Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,6 +38,9 @@
                     <td>{{@$brand->brand_name}}</td>
                     <td>{{@$brand->created_at}}</td>
                     <td>{{@$brand->updated_at}}</td>
+                    <td>
+                        <a href="{{url("/edit-brand/{$brand->__get("id")}"}}" class="btn btn-outline-dark">Edit</a>
+                    </td>
                 </tr>
                 @endforeach
                 </tbody>

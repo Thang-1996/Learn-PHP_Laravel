@@ -26,6 +26,7 @@
                     <th>Category_Name</th>
                     <th>Create_At</th>
                     <th>Update_At</th>
+                    <th>Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +42,9 @@
                     <td>{{$category->__get("category_name")}}</td>
                     <td>{{$category->__get("created_at")}}</td>
                     <td>{{$category->__get("updated_at")}}</td>
+                    <td>
+                        <a href="{{url("/edit-category/{$category->__get("id")}")}}" class="btn btn-outline-dark">Edit</a>
+                    </td>
                 </tr>
                 @endforeach
                 </tbody>
