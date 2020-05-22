@@ -26,3 +26,15 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+$factory->define(\App\Category::class,function (Faker $faker){
+   return [
+       // định nghĩa ra 1 factory để insert vào dữ liệu ảo
+       "category_name" => $faker->unique()->company
+   ];
+});
+$factory->define(\App\Brand::class,function (Faker $faker){
+    return [
+        // định nghĩa ra 1 factory để insert vào dữ liệu ảo
+        "category_name" => $faker->unique()->company
+    ];
+});

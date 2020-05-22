@@ -13,11 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-// tạo thêm router mới sau / là đường dẫn đến routing  // goi duong dan duong file controller ma khong can phai viet ham ham se duoc viet o controller
+Route::get('/',"WebController@index");
+// tạo thêm router mới sau / l
+//à đường dẫn đến routing  // goi duong dan duong file controller ma khong can phai viet ham ham se duoc viet o controller
 Route::get("/login","WebController@loginPage"); // sau @ la ten ham web controller la ten file
 Route::get("/register","WebController@registerPage"); // sau @ la ten ham web controller la ten file
 Route::get("/forgotpassword","WebController@forgotpassword");
+//category
+Route::get("/list-category","WebController@listCategory");
+Route::get("/new-category","WebController@newCategory");
+// post new category
+Route::post("/save-category","WebController@saveCategory");
+Route::get("/list-brand","WebController@listBrand");
+Route::get("/new-brand","WebController@newBrand");
+Route::post("/save-brand","WebController@saveBrand");
 
