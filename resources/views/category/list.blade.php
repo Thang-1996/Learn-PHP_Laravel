@@ -26,6 +26,7 @@
                     <th>Category_Name</th>
                     <th>Create_At</th>
                     <th>Update_At</th>
+                    <th>ProductCount</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -43,6 +44,7 @@
                     <td>{{$category->__get("category_name")}}</td>
                     <td>{{$category->__get("created_at")}}</td>
                     <td>{{$category->__get("updated_at")}}</td>
+                    <td>{{$category->__get("products_count")}}</td>
                     <td>
                         <a href="{{url("/edit-category/{$category->__get("id")}")}}" class="btn btn-outline-dark">Edit</a>
                     </td>

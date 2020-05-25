@@ -34,3 +34,11 @@ Route::get("/edit-brand/{id}","WebController@editBrand"); // id truyền vào t�
 Route::put("/update-brand/{id}","WebController@updateBrand");
 //Delete
 Route::delete("/delete-brand/{id}","WebController@deleteBrand");
+
+// Product
+Route::get("/list-product","WebController@listProduct");
+Route::get("/new-product","WebController@newProduct");
+Route::post("/save-product","WebController@saveProduct");
+Route::delete("/delete-product/{id}","WebController@deleteProduct");
+Route::put("/update-product/{id}","WebController@updateProduct");
+Route::get("/edit-product/{id}","WebController@editProduct");
