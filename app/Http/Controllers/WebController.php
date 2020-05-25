@@ -6,6 +6,7 @@ use App\Category;
 use App\Brand;
 use App\Product;
 use Carbon\Carbon;
+use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use mysql_xdevapi\Exception;
@@ -207,10 +208,14 @@ class WebController extends Controller
                 $file = $request->file("product_image"); // trả về 1 đối tượng lấy từ request của input
                 // lấy tên file
                 // thêm time() để thay đổi thời gian upload ảnh lên để không bị trùng ảnh với nhau
-                $fileName = time().$file->getClientOriginalName(); //  lấy tên gốc original của file gửi lên từ client
-                $file->move(public_path("media"),$fileName); // đẩy file vào thư mục media với tên là fileName
-                //convert string to ProductImage
-                $productImage = "media/".$fileName; // lấy nguồn file
+                $allow = ["png","jpg","jpeg","gif"];
+                $extName = $file->getClientOriginalExtension();
+                if(in_array($extName,$allow)){ // nếu đuôi file gửi lên nằm trong array
+                    $fileName = time().$file->getClientOriginalName(); //  lấy tên gốc original của file gửi lên từ client
+                    $file->move(public_path("media"),$fileName); // đẩy file vào thư mục media với tên là fileName
+                    //convert string to ProductImage
+                    $productImage = "media/".$fileName; // lấy nguồn file
+                }
             }
             Product::create([
                 "product_name" => $request->get("product_name"),
@@ -226,6 +231,16 @@ class WebController extends Controller
         }
         return redirect()->to("/list-product");
     }
+
+    public function editProduct($id, Request $request){
+        $category = Category::all();
+        $brand = Brand::all();
+        $product = Product::findOrFail($id);
+        return view("product.edit",[
+            "categories"=>$category,
+            "brands" => $brand,
+            "product" => $product]);
+    }
     public function deleteProduct($id){
         $product = Product::findorFail($id);
         try {
@@ -235,25 +250,36 @@ class WebController extends Controller
         }
         return redirect()->to("/list-product");
     }
-
-    public function editProduct($id){
-        $category = Category::all();
-        $brand = Brand::all();
-        $product = Product::findOrFail($id);
-        return view("product.edit",[
-            "categories"=>$category,
-            "brands" => $brand,
-            "product" => $product]);
-    }
     public function updateProduct($id,Request $request){
         $product = Product::findOrFail($id);
         $request->validate([ // unique voi categories(table) category_name(truong muon unique), (id khong muon bi unique)
-            "product_name" => "required|min:3|unique:products,product_name,{$id}"
+            "product_name" => "required|min:3|unique:products,product_name,{$id}",
+            "product_desc" => "required",
+            "price" => "required|numeric|min:0",
+            "qty" => "required|numeric|min:1",
+            "category_id" => "required",
+            "brand_id" => "required",
         ]);
 //            die("pass roi");
         try{
+            $productImage = $product->get("product_image");
+            // xử lý để đưa ảnh lên media trong public sau đó lấy nguồn file cho vào biến $product
+            if($request->hasFile("product_image")){ // nếu request gửi lên có file product_image là inputname
+                $file = $request->file("product_image"); // trả về 1 đối tượng lấy từ request của input
+                // lấy tên file
+                // thêm time() để thay đổi thời gian upload ảnh lên để không bị trùng ảnh với nhau
+                $allow = ["png","jpg","jpeg","gif"];
+                $extName = $file->getClientOriginalExtension();
+                if(in_array($extName,$allow)){ // nếu đuôi file gửi lên nằm trong array
+                    $fileName = time().$file->getClientOriginalName(); //  lấy tên gốc original của file gửi lên từ client
+                    $file->move(public_path("media"),$fileName); // đẩy file vào thư mục media với tên là fileName
+                    //convert string to ProductImage
+                    $productImage = "media/".$fileName; // lấy nguồn file
+                }
+            }
             $product->update([
-                 "product_name" => $request->get("product_name"),
+                "product_name" => $request->get("product_name"),
+                "product_image" => $productImage,
                 "product_desc" => $request->get("product_desc"),
                 "price" => $request->get("price"),
                 "qty" => $request->get("qty"),

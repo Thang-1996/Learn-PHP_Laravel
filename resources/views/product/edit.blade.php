@@ -10,7 +10,7 @@
         <!-- /.card-header -->
         <!-- form start -->
         {{--        update thì method sẽ là put method trong form thi phai la post @method thi la put--}}
-        <form role="form" action="{{url("/update-product/{$product->__get("id")}")}}" method="post">
+        <form role="form" action="{{url("/update-product/{$product->__get("id")}")}}" method="post" enctype="multipart/form-data">
             @method("PUT")
             {{--            // method"POST" dùng để báo route--}}
             @csrf
@@ -22,6 +22,11 @@
                     @error("product_name")
                     <span class="error invalid-feedback">{{$message}}</span>
                     @enderror
+                </div>
+                <div class="form-group">
+                    <label>Product Image</label>
+                    <p>Old Image</p><img src="{{$product->getImage()}}" width="60px"/>
+                    <input type="file" name="product_image" class="form-control" placeholder="New Product Name"/>
                 </div>
                 <div class="form-group">
                     <label>Product Desc</label>
