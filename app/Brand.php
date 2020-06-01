@@ -10,4 +10,10 @@ class Brand extends Model
     public $fillable = [
         "brand_name"
     ];
+    public function getImage(){
+        if(is_null($this->__get("brand_image"))){
+            return asset("media/default.png");
+        }
+        return asset($this->__get("brand_image"));
+    }
 }

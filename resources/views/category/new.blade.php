@@ -9,7 +9,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form role="form" action="{{url("save-category")}}" method="post">
+        <form role="form" action="{{url("admin/save-category")}}" method="post">
             @method("POST")
 {{--            // method"POST" dùng để báo route--}}
             @csrf
@@ -21,6 +21,10 @@
                     @error("category_name")
                     <span class="error invalid-feedback">{{$message}}</span>
                     @enderror
+                </div>
+                <div class="form-group">
+                    <label>Category Image</label>
+                    <input type="file" name="category_image" class="form-control" placeholder="New Product Image">
                 </div>
 {{--                // biến error để lưu lỗi--}}
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,33 +13,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Authencation
 
-Route::get('/',"WebController@index");
+
+Auth::routes();
+require_once "user.php";
 // tạo thêm router mới sau / l
 //à đường dẫn đến routing  // goi duong dan duong file controller ma khong can phai viet ham ham se duoc viet o controller
-Route::get("/login","WebController@loginPage"); // sau @ la ten ham web controller la ten file
-Route::get("/register","WebController@registerPage"); // sau @ la ten ham web controller la ten file
-Route::get("/forgotpassword","WebController@forgotpassword");
+//Route::get("/login","WebController@loginPage"); // sau @ la ten ham web controller la ten file
+//Route::get("/register","WebController@registerPage"); // sau @ la ten ham web controller la ten file
+//Route::get("/forgotpassword","WebController@forgotpassword");
+Route::group(["middleware"=>["admin","auth"],"prefix"=>"admin"],function(){ // prefix là tiền tố nằm trước link route
+   require_once "admin.php";
+});
 //category
-Route::get("/list-category","WebController@listCategory");
-Route::get("/new-category","WebController@newCategory");
-// post new category
-Route::post("/save-category","WebController@saveCategory");
-Route::get("/list-brand","WebController@listBrand");
-Route::get("/new-brand","WebController@newBrand");
-Route::post("/save-brand","WebController@saveBrand");
-// update
-Route::get("/edit-category/{id}","WebController@editCategory"); // id truyền vào tương đương với querry parameter
-Route::put("/update-category/{id}","WebController@updateCategory");
-Route::get("/edit-brand/{id}","WebController@editBrand"); // id truyền vào tương đương với querry parameter
-Route::put("/update-brand/{id}","WebController@updateBrand");
-//Delete
-Route::delete("/delete-brand/{id}","WebController@deleteBrand");
 
-// Product
-Route::get("/list-product","WebController@listProduct");
-Route::get("/new-product","WebController@newProduct");
-Route::post("/save-product","WebController@saveProduct");
-Route::delete("/delete-product/{id}","WebController@deleteProduct");
-Route::put("/update-product/{id}","WebController@updateProduct");
-Route::get("/edit-product/{id}","WebController@editProduct");
+

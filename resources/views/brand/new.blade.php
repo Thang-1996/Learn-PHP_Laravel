@@ -9,7 +9,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form role="form" action="{{url("save-brand")}}" method="post">
+        <form role="form" action="{{url("admin/save-brand")}}" method="post" enctype="multipart/form-data">
             @method("POST")
 {{--            // method"POST" dùng để báo route--}}
             @csrf
@@ -21,6 +21,10 @@
                     @error("brand_name")
                     <span class="error invalid-feedback">{{$message}}</span>
                     @enderror
+                </div>
+                <div class="form-group">
+                    <label>Brand Logo</label>
+                    <input type="file" name="brand_image" class="form-control" placeholder="New Brand Logo">
                 </div>
 {{--                // biến error để lưu lỗi--}}
             </div>

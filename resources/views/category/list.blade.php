@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Category</h3>
-                <a href="{{url("/new-category")}}" class="btn btn-outline-success ml-3">+</a>
+                <a href="{{url("admin/new-category")}}" class="btn btn-outline-success ml-3">+</a>
             <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -24,6 +24,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Category_Name</th>
+                    <th>Category_Image</th>
                     <th>Create_At</th>
                     <th>Update_At</th>
                     <th>ProductCount</th>
@@ -42,14 +43,15 @@
 {{--                    <td>{{@$category->updated_at}}</td>--}}
                     <td>{{$category->__get("id")}}</td>
                     <td>{{$category->__get("category_name")}}</td>
+                    <td>{{$category->__get("category_image")}}</td>
                     <td>{{$category->__get("created_at")}}</td>
                     <td>{{$category->__get("updated_at")}}</td>
                     <td>{{$category->__get("products_count")}}</td>
                     <td>
-                        <a href="{{url("/edit-category/{$category->__get("id")}")}}" class="btn btn-outline-dark">Edit</a>
+                        <a href="{{url("admin/edit-category/{$category->__get("id")}")}}" class="btn btn-outline-dark">Edit</a>
                     </td>
                     <td>
-                        <form action="{{url("/delete-category/{$category->__get("id")}")}}" method="post">
+                        <form action="{{url("admin/delete-category/{$category->__get("id")}")}}" method="post">
                             @method("DELETE")
                             @csrf
                             <button type="submit" onclick="return confirm('chac khong?');" class="btn btn-outline-dark">Delete</button>

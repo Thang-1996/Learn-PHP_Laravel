@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Product</h3>
-            <a href="{{url("/new-product")}}" class="btn btn-outline-success ml-3">+</a>
+            <a href="{{url("admin/new-product")}}" class="btn btn-outline-success ml-3">+</a>
             <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -55,11 +55,11 @@
                         <td>{{$product->__get("created_at")}}</td>
                         <td>{{$product->__get("updated_at")}}</td>
                         <td>
-                            <a href="{{url("/edit-product/{$product->__get("id")}")}}"
+                            <a href="{{url("admin/edit-product/{$product->__get("id")}")}}"
                                class="btn btn-outline-dark">Edit</a>
                         </td>
                         <td>
-                            <form action="{{url("/delete-product/{$product->__get("id")}")}}" method="post">
+                            <form action="{{url("admin/delete-product/{$product->__get("id")}")}}" method="post">
                                 @method("DELETE")
                                 @csrf
                                 <button type="submit" onclick="return confirm('chac khong?');"

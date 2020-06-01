@@ -10,7 +10,7 @@
         <!-- /.card-header -->
         <!-- form start -->
 {{--        update thì method sẽ là put method trong form thi phai la post @method thi la put--}}
-        <form role="form" action="{{url("/update-category/{$category->__get("id")}")}}" method="post">
+        <form role="form" action="{{url("admin/update-category/{$category->__get("id")}")}}" method="post">
             @method("PUT")
             {{--            // method"POST" dùng để báo route--}}
             @csrf

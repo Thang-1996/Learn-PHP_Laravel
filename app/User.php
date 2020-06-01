@@ -16,8 +16,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name','image', 'email', 'telephone','address','password',
     ];
+    public const ADMIN_ROLE = 1;
+    public const USER_ROLE = 0; // hang so de set quyen cho admin hoac user
 
     /**
      * The attributes that should be hidden for arrays.

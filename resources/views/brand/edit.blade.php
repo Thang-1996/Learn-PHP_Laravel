@@ -10,7 +10,7 @@
         <!-- /.card-header -->
         <!-- form start -->
 {{--        update thì method sẽ là put method trong form thi phai la post @method thi la put--}}
-        <form role="form" action="{{url("/update-brand/{$brand->__get("id")}")}}" method="post">
+        <form role="form" action="{{url("admin/update-brand/{$brand->__get("id")}")}}" method="post" enctype="multipart/form-data">
             @method("PUT")
             {{--            // method"POST" dùng để báo route--}}
             @csrf
@@ -22,6 +22,11 @@
                     @error("brand_name")
                     <span class="error invalid-feedback">{{$message}}</span>
                     @enderror
+                </div>
+                <div class="form-group">
+                    <label>Brand Logo</label>
+                    <p>Old Logo</p><img src="{{$brand->getImage()}}" width="60px"/>
+                    <input type="file" name="brand_image" class="form-control" placeholder="New Brand Logo"/>
                 </div>
                 {{--                // biến error để lưu lỗi--}}
             </div>
