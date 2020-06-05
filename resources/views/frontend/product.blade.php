@@ -24,14 +24,18 @@
                         </div>
                         <div class="product__details__price">${{$product->__get("price")}}</div>
                         <p>{{$product->__get("product_desc")}}</p>
+                        <form method="POST" action="{{url("/cart/add/{$product->__get("id")}")}}">
+                            @method("POST")
+                            @csrf
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="{{$product->__get("qty")}}">
+                                    <input type="text" value="1">
                                 </div>
                             </div>
+                            <button type="submit">asdasdasd</button>
                         </div>
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
+                        </form>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
                             <li><b>Availability</b> <span>In Stock</span></li>

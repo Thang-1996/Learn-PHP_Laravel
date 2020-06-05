@@ -44,8 +44,8 @@ $factory->define(\App\Product::class,function (Faker $faker){
             "product_desc" => $faker->text,
             "price" => $faker->numberBetween(0,50000),
             "qty" => $faker->numberBetween(1,200),
-            "category_id" => $faker->numberBetween(4,10),
-            "brand_id" => $faker->numberBetween(2,3),
+            "category_id" => $faker->numberBetween(15,19),
+            "brand_id" => $faker->numberBetween(1,3),
             ];
 });
 

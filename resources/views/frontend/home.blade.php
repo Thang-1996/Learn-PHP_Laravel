@@ -1,3 +1,4 @@
+
 @extends("frontend.layout")
 @section("content")
     <!-- Hero Section Begin -->
@@ -8,7 +9,7 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>Category List</span>
                         </div>
                         <ul>
                             <x-frontend.sidebaritem/>
@@ -56,31 +57,14 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
+                    @foreach($most_viewer as $mow)
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-1.jpg">
-                            <h5><a href="#">Fresh Fruit</a></h5>
+                        <div class="categories__item set-bg" data-setbg="{{$mow->getImage()}}">
+                            <h6><a href="#">{{$mow->__get("product_name")}}</a></h6>
+                            <h5>View:<a href="#">{{$mow->__get("view_count")}}</a></h5>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-2.jpg">
-                            <h5><a href="#">Dried Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-3.jpg">
-                            <h5><a href="#">Vegetables</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-4.jpg">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-5.jpg">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -97,11 +81,9 @@
                     </div>
                     <div class="featured__controls">
                         <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
+                            @foreach(\App\Category::all() as $category)
+                            <li data-filter=".oranges">{{$category->__get("category_name")}}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -114,7 +96,7 @@
                                 <ul class="featured__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a href="#" onclick="addToCart({{$f->__get("id")}})"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="featured__item__text">

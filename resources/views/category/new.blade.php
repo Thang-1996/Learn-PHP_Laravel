@@ -9,7 +9,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form role="form" action="{{url("admin/save-category")}}" method="post">
+        <form role="form" action="{{url("admin/save-category")}}" method="post" enctype="multipart/form-data">
             @method("POST")
 {{--            // method"POST" dùng để báo route--}}
             @csrf

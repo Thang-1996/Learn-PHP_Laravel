@@ -43,7 +43,7 @@
 {{--                    <td>{{@$category->updated_at}}</td>--}}
                     <td>{{$category->__get("id")}}</td>
                     <td>{{$category->__get("category_name")}}</td>
-                    <td>{{$category->__get("category_image")}}</td>
+                    <td><img width="60px" src="{{$category->getImage()}}"/></td>
                     <td>{{$category->__get("created_at")}}</td>
                     <td>{{$category->__get("updated_at")}}</td>
                     <td>{{$category->__get("products_count")}}</td>

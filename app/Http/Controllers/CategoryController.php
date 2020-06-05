@@ -49,7 +49,7 @@ class CategoryController extends Controller
 //tự động cập nhật thời gian cho category
             Category::create([
                 "category_name" => $request->get("category_name"),
-                "category_image" =>$categoryImage
+                "category_image" =>$categoryImage,
             ]);
 
             // "updated_at"=>Carbon::now(),

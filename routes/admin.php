@@ -21,3 +21,4 @@ Route::post("/save-product","ProductController@saveProduct");
 Route::delete("/delete-product/{id}","ProductController@deleteProduct");
 Route::put("/update-product/{id}","ProductController@updateProduct");
 Route::get("/edit-product/{id}","ProductController@editProduct");
+
