@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\OrderCreated;
+use App\Listeners\CleanCart;
+use App\Listeners\MailToUserAfterOrderCreated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +21,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        OrderCreated::class=>[ // noi dang ky su kien de cac doi tuong khac lang nghe
+            // có nghĩa khi sự kiện ordercreated phát ra sẽ có danh sách những listener sẽ lắng nghe
+            CleanCart::class,
+            MailToUserAfterOrderCreated::class,
+        ]
     ];
 
     /**

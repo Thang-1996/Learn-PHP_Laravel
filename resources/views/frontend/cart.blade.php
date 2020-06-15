@@ -28,7 +28,7 @@
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <input type="text" value="{{$p->__get("qty")}}">
+                                            <input type="text" value="{{$p->cart_qty}}">
                                         </div>
                                     </div>
                                 </td>
@@ -71,7 +71,7 @@
                             <li>Subtotal <span>{{$grandTotal}}</span></li>
                             <li>Total <span>{{$grandTotal}}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href={{url("/checkout")}} class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>

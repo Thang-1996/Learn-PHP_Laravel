@@ -30,10 +30,10 @@
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input type="text" name="qty" value="1">
                                 </div>
                             </div>
-                            <button type="submit">asdasdasd</button>
+                            <button type="submit" class="btn btn-primary">Add To Card</button>
                         </div>
                         </form>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>

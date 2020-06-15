@@ -30,10 +30,10 @@ class ProductController extends Controller
             ]
         );
     }
-    public function saveProduct(Request $request){ // tạo biến request lưu dữ liệu người dùng gửi lên ở body
+    public function saveProduct(){ // tạo biến request lưu dữ liệu người dùng gửi lên ở body
         // đầu tiên phải validate dữ liệu cả bên html và bên sever
         // cách validate
-        $request->validate([
+        request()->validate([
             "product_name" => "required",
             "product_desc" => "required",
             "price" => "required|numeric|min:0",
@@ -45,8 +45,8 @@ class ProductController extends Controller
             // bắt lỗi nếu không có = null
             $productImage = null;
             // xử lý để đưa ảnh lên media trong public sau đó lấy nguồn file cho vào biến $product
-            if($request->hasFile("product_image")){ // nếu request gửi lên có file product_image là inputname
-                $file = $request->file("product_image"); // trả về 1 đối tượng lấy từ request của input
+            if(request()->hasFile("product_image")){ // nếu request gửi lên có file product_image là inputname
+                $file = request()->file("product_image"); // trả về 1 đối tượng lấy từ request của input
                 // lấy tên file
                 // thêm time() để thay đổi thời gian upload ảnh lên để không bị trùng ảnh với nhau
                 $allow = ["png","jpg","jpeg","gif"];
@@ -59,13 +59,13 @@ class ProductController extends Controller
                 }
             }
             Product::create([
-                "product_name" => $request->get("product_name"),
+                "product_name" => request()->get("product_name"),
                 "product_image" =>$productImage,
-                "product_desc" => $request->get("product_desc"),
-                "price" => $request->get("price"),
-                "qty" => $request->get("qty"),
-                "category_id" => $request->get("category_id"),
-                "brand_id" => $request->get("brand_id"),
+                "product_desc" => request()->get("product_desc"),
+                "price" => request()->get("price"),
+                "qty" => request()->get("qty"),
+                "category_id" => request()->get("category_id"),
+                "brand_id" => request()->get("brand_id"),
             ]);
         }catch (\Exception $exception){
             return redirect()->back();
@@ -73,7 +73,7 @@ class ProductController extends Controller
         return redirect()->to("admin/list-product");
     }
 
-    public function editProduct($id, Request $request){
+    public function editProduct($id){
         $category = Category::all();
         $brand = Brand::all();
         $product = Product::findOrFail($id);
@@ -91,9 +91,9 @@ class ProductController extends Controller
         }
         return redirect()->to("admin/list-product");
     }
-    public function updateProduct($id,Request $request){
+    public function updateProduct($id){
         $product = Product::findOrFail($id);
-        $request->validate([ // unique voi categories(table) category_name(truong muon unique), (id khong muon bi unique)
+        request()->validate([ // unique voi categories(table) category_name(truong muon unique), (id khong muon bi unique)
             "product_name" => "required|min:3|unique:products,product_name,{$id}",
             "product_desc" => "required",
             "price" => "required|numeric|min:0",
@@ -105,8 +105,8 @@ class ProductController extends Controller
         try{
             $productImage = $product->get("product_image");
             // xử lý để đưa ảnh lên media trong public sau đó lấy nguồn file cho vào biến $product
-            if($request->hasFile("product_image")){ // nếu request gửi lên có file product_image là inputname
-                $file = $request->file("product_image"); // trả về 1 đối tượng lấy từ request của input
+            if(request()->hasFile("product_image")){ // nếu request gửi lên có file product_image là inputname
+                $file = request()->file("product_image"); // trả về 1 đối tượng lấy từ request của input
                 // lấy tên file
                 // thêm time() để thay đổi thời gian upload ảnh lên để không bị trùng ảnh với nhau
                 $allow = ["png","jpg","jpeg","gif"];
@@ -119,13 +119,13 @@ class ProductController extends Controller
                 }
             }
             $product->update([
-                "product_name" => $request->get("product_name"),
+                "product_name" => request()->get("product_name"),
                 "product_image" => $productImage,
-                "product_desc" => $request->get("product_desc"),
-                "price" => $request->get("price"),
-                "qty" => $request->get("qty"),
-                "category_id" => $request->get("category_id"),
-                "brand_id" => $request->get("brand_id"),
+                "product_desc" => request()->get("product_desc"),
+                "price" => request()->get("price"),
+                "qty" => request()->get("qty"),
+                "category_id" => request()->get("category_id"),
+                "brand_id" => request()->get("brand_id"),
             ]);
         }catch(Exception $exception){
             return redirect()->back();

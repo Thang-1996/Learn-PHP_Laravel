@@ -17,7 +17,7 @@ $.extend( $.validator.messages, {
 	maxlength: $.validator.format( "Geben Sie bitte maximal {0} Zeichen ein." ),
 	minlength: $.validator.format( "Geben Sie bitte mindestens {0} Zeichen ein." ),
 	rangelength: $.validator.format( "Geben Sie bitte mindestens {0} und maximal {1} Zeichen ein." ),
-	email: "Geben Sie bitte eine gültige E-Mail-Adresse ein.",
+	email: "Geben Sie bitte eine gültige E-email-Adresse ein.",
 	url: "Geben Sie bitte eine gültige URL ein.",
 	date: "Geben Sie bitte ein gültiges Datum ein.",
 	number: "Geben Sie bitte eine Nummer ein.",
